@@ -15,3 +15,8 @@
   という技術を使用しています。
   <!-- </v-alert> -->
 </template>
+
+<script setup>
+const cookie = useCookie("visited", { maxAge: 60 * 60 * 24 * 30 * 2 });
+cookie.value = true;
+</script>
