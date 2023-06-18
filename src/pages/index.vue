@@ -4,7 +4,7 @@
 definePageMeta({
   middleware: [
     function (to, from) {
-      if (!useCookie("visited")) {
+      if (!useCookie("visited").value) {
         return navigateTo("/about");
       }
     },
