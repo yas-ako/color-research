@@ -1,7 +1,7 @@
 <template>
+  <p class="text-h4 mb-8 text-center">この調査について</p>
   <!-- <div class="text-h2 text-center">Hello world!</div> -->
   <!-- <v-alert title="この調査について" type="info"> -->
-  <p class="text-h4 mb-8 text-center">この調査について</p>
   <p>
     5年次研究論文にあたり、「さまざまな色の組み合わせをどう感じるのか」について調査しています。そのためのアンケート調査にご協力をお願い致します。
   </p>
@@ -14,9 +14,16 @@
   回答したかどうかを判断するため、このアンケートフォームでは Cookie
   という技術を使用しています。
   <!-- </v-alert> -->
+  <div class="my-7">
+    <v-btn class="bg-primary mx-auto" to="/" @click="click">
+      アンケートに解答する
+    </v-btn>
+  </div>
 </template>
 
 <script setup>
 const cookie = useCookie("visited", { maxAge: 60 * 60 * 24 * 30 * 2 });
-cookie.value = true;
+function click() {
+  cookie.value = true;
+}
 </script>
