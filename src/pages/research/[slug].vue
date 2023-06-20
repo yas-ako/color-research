@@ -1,7 +1,7 @@
 <template>
   aaa
   <p>
-    <DisplayColor :id="currentNumber" />
+    <DisplayColor :id="currentNumber" :type="$route.params.slug"/>
   </p>
   <!-- <div @click="currentNumber = currentNumber + 1">+</div> -->
   <!-- <div @click="currentNumber = currentNumber - 1">-</div> -->

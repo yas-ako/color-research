@@ -1,6 +1,7 @@
 <template>
   <!-- <div :style="colors"> -->
   <div>
+    {{ type }}
     <div class="w-100 color1 pa-auto h-half"></div>
     <div class="w-100 color2 h-half pa-auto"></div>
   </div>
@@ -20,6 +21,7 @@
 
 <script setup lang="ts">
 interface Props {
+  type: '1'|'2';
   id: number;
 }
 
