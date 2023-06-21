@@ -27,9 +27,26 @@
 const currentNumber = ref(0);
 
 function next(id) {
-  localStorage.setItem("research" + currentNumber.value, id);
   currentNumber.value = currentNumber.value + 1;
+  dataSave(id);
 }
+
+function dataSave(id) {
+  // ローカルストレージからデータを取得
+  const curData = localStorage.getItem(useRoute().params.slug);
+  const afterData = curData ? curData + "," + id : id;
+  localStorage.setItem(useRoute().params.slug, afterData);
+}
+// function dataSave(key: string, value: string) {
+//   const curData: string[] = dataLoad(key);
+
+//   curData.push;
+//   localStorage.setItem("research" + currentNumber.value, value);
+// }
+
+// function dataLoad(key: string): JSON {
+//   return JSON.parse(localStorage.getItem(key)!);
+// }
 
 const buttonDatas = [
   { id: 1, displayText: "◎" },

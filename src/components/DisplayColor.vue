@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 interface Props {
-  type: '1'|'2';
+  type: string | string[];
   id: number;
 }
 
