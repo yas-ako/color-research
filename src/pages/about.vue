@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-const cookie = useCookie("visited", { maxAge: 60 * 60 * 24 * 30 * 2 });
+const cookie = useCookie("visited", { maxAge: 60 * 60 * 24 * 30 * 3 });
 function click() {
   cookie.value = true;
 }
