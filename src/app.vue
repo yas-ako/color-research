@@ -22,29 +22,10 @@
       <v-container>
         <NuxtPage />
       </v-container>
-      <!-- <v-bottom-navigation
-        class="text-h5 p-6"
-        v-if="$route.path.match(/research/)"
-      >
-        <template v-for="buttonData of buttonDatas">
-          <SurveyButtonIcon
-            class="pa-5"
-            :id="buttonData.id"
-            :display-text="buttonData.displayText"
-          />
-        </template>
-      </v-bottom-navigation> -->
     </v-main>
   </v-app>
 </template>
 
 <script setup>
 const isMenuOpen = ref(false);
-
-// const buttonDatas = [
-//   { id: 1, displayText: "◎" },
-//   { id: 2, displayText: "〇" },
-//   { id: 3, displayText: "△" },
-//   { id: 4, displayText: "×" },
-// ];
 </script>
