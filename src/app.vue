@@ -2,7 +2,9 @@
   <v-app>
     <v-app-bar>
       <v-app-bar-title>
-        <NuxtLink to="/">色の区別に関する調査</NuxtLink>
+        <NuxtLink to="/"
+          ><h1 class="text-h5">色の組み合わせに関する調査</h1></NuxtLink
+        >
       </v-app-bar-title>
       <v-app-bar-nav-icon
         variant="text"
