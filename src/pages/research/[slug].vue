@@ -1,15 +1,33 @@
 <template>
   aaa
   <!-- <p> -->
+
+  <div class="text-center">
+    <v-dialog v-model="dialog" width="auto">
+      <!-- <template v-slot:activator="{ props }">
+        <v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
+      </template> -->
+
+      <v-card>
+        <v-card-text>
+          <p class="text-h4">aa</p>
+          このアンケート調査では、
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" block @click="dialog = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
   <DisplayColor :id="currentNumber" :type="$route.params.slug" />
   <!-- </p> -->
   <!-- <div @click="currentNumber = currentNumber + 1">+</div> -->
   <!-- <div @click="currentNumber = currentNumber - 1">-</div> -->
 
-  <v-btn @click="currentNumber = currentNumber - 1" class="bg-primary ma-6"
-    >-</v-btn
-  >
-  {{ currentNumber }}
+  <!-- <v-btn @click="currentNumber = currentNumber - 1" class="bg-primary ma-6"> -->
+  <!-- - -->
+  <!-- </v-btn> -->
+  <!-- {{ currentNumber }} -->
 
   <v-bottom-navigation class="text-h5 p-6" v-if="$route.path.match(/research/)">
     <template v-for="buttonData of buttonDatas">
@@ -24,6 +42,7 @@
 </template>
 
 <script setup>
+const dialog = ref(true);
 const currentNumber = ref(0);
 
 function next(id) {
