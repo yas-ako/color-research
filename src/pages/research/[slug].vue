@@ -1,13 +1,6 @@
 <template>
-  aaa
-  <!-- <p> -->
-
   <div class="text-center">
     <v-dialog v-model="dialog" width="auto">
-      <!-- <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
-      </template> -->
-
       <v-card>
         <v-card-text>
           <p class="text-h4">aa</p>
@@ -19,15 +12,8 @@
       </v-card>
     </v-dialog>
   </div>
-  <DisplayColor :id="currentNumber" :type="$route.params.slug" />
-  <!-- </p> -->
-  <!-- <div @click="currentNumber = currentNumber + 1">+</div> -->
-  <!-- <div @click="currentNumber = currentNumber - 1">-</div> -->
 
-  <!-- <v-btn @click="currentNumber = currentNumber - 1" class="bg-primary ma-6"> -->
-  <!-- - -->
-  <!-- </v-btn> -->
-  <!-- {{ currentNumber }} -->
+  <DisplayColor :id="currentNumber" :type="$route.params.slug" />
 
   <v-bottom-navigation class="text-h5 p-6" v-if="$route.path.match(/research/)">
     <template v-for="buttonData of buttonDatas">
@@ -56,16 +42,6 @@ function dataSave(id) {
   const afterData = curData ? curData + "," + id : id;
   localStorage.setItem(useRoute().params.slug, afterData);
 }
-// function dataSave(key: string, value: string) {
-//   const curData: string[] = dataLoad(key);
-
-//   curData.push;
-//   localStorage.setItem("research" + currentNumber.value, value);
-// }
-
-// function dataLoad(key: string): JSON {
-//   return JSON.parse(localStorage.getItem(key)!);
-// }
 
 const buttonDatas = [
   { id: 1, displayText: "◎" },
