@@ -1,8 +1,5 @@
 <template>
-  <!-- <div :style="colors"> -->
   <div>
-    <!-- {{ type }} -->
-    <!-- {{ $route.params.path }} -->
     <div
       v-if="$route.path.match(/1/)"
       class="w-100 color1 pa-auto h-half"
@@ -59,16 +56,8 @@ const id = withDefaults(defineProps<Props>(), {
   id: 1,
 });
 
-// const colors = ref({
-//   "--color1": "#222222",
-//     "--color2": "#777777",
-// });
-
 const color1 = ref("#222222");
-// const color2 = ref("#222222");
-// const color1 = computed(() => {
-//   return colorData1.data[id.id].color1;
-// });
+
 watch(id, (next, prev) => {
   color1.value = colorData1.data[id.id].color1;
 });
@@ -76,16 +65,4 @@ watch(id, (next, prev) => {
 const color2 = computed(() => {
   return colorData1.data[id.id].color2;
 });
-
-// watch(
-//   () => id,
-//   () => (color1.value = colorData1.data[id.id].color1)
-// );
-// () => (colors.value["--color1"] = colorData1.data[id.id].color1)
-
-// watch(
-//   () => id,
-//   // () => (colors.value["--color1"] = colorData1.data[id.id].color1)
-//   () => (color2.value = colorData1.data[id.id].color1)
-// );
 </script>
