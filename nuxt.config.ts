@@ -10,4 +10,24 @@ export default defineNuxtConfig({
     "mdi/css/materialdesignicons.min.css",
     "~/assets/css/style.css",
   ],
+  app: {
+    head: {
+      link: [
+        {
+          rel: "preconnect",
+          href: "https://fonts.googleapis.com",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap",
+          crossorigin: "",
+        },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "",
+        },
+      ],
+    },
+  },
 });

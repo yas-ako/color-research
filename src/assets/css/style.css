@@ -5,3 +5,7 @@ a {
 a:visited {
   color: inherit;
 }
+
+html {
+  font-family: "Noto Sans JP", sans-serif;
+}
