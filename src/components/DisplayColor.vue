@@ -1,14 +1,14 @@
 <template>
   <div>
     <div
-      v-if="$route.path.match(/1/)"
+      v-if="$route.path.match(/2/)"
       class="w-100 colorA pa-auto h-half"
     ></div>
     <div
-      v-if="$route.path.match(/1/)"
+      v-if="$route.path.match(/2/)"
       class="w-100 colorB h-half pa-auto"
     ></div>
-    <template v-else-if="$route.path.match(/2/)">
+    <template v-else-if="$route.path.match(/1/)">
       <div class="w-100 colorA h-all pa-auto text-center">
         <div class="text-h4 my-auto">あいうえお憂鬱</div>
       </div>
