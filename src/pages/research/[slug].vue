@@ -1,13 +1,40 @@
 <template>
   <div class="text-center">
-    <v-dialog v-model="dialog" width="auto">
+    <v-dialog v-model="starDialog" persistent width="auto">
+      <v-card>
+        <v-card-text>
+          <template v-if="$route.params.slug == '1'">
+            <p class="text-h4">
+              {{ surveyInstruction[1].title }}
+            </p>
+            {{ surveyInstruction[1].message }}
+          </template>
+          <template v-if="$route.params.slug == '2'">
+            <p class="text-h4">
+              {{ surveyInstruction[2].title }}
+            </p>
+            {{ surveyInstruction[2].message }}
+          </template>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            block
+            @click="closeStartDialog($route.params.slug)"
+            >OK</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="finishDialog" persistent width="auto">
       <v-card>
         <v-card-text>
           <p class="text-h4">aa</p>
-          このアンケート調査では、
+          アンケートへのご協力ありがとうございました。アンケートは二つあります。両方の回答をお願いします。
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" block @click="dialog = false">OK</v-btn>
+          <v-btn color="primary" block @click="submit()">回答を送信</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -30,21 +57,47 @@
 <script setup>
 import colorData1 from "@/assets/json/1.json";
 
-const dialog = ref(true);
+const surveyInstruction = {
+  1: {
+    title: "調査1",
+    message:
+      "調査1では、色の見分けやすさを判断していただきます。画面に表示された色が見やすいかどうか、4段階で評価してください。見やすく感じるものから、「◎」「〇」「△」「×」の順で評価してください。",
+  },
+  2: {
+    titlte: "調査2",
+    message:
+      "調査2では、色から感じる印象を判断していただきます。心地よく感じる組み物から、「◎」「〇」「△」「×」の順で評価してください",
+  },
+};
+
+const starDialog = ref(true);
+const finishDialog = ref(false);
 const currentNumber = ref(0);
 const finished = ref(false);
 
 function next(id) {
   dataSave(id);
-  currentNumber.value = currentNumber.value + 1;
-  const nextid = id + 1;
+  const nextid = currentNumber.value + 1;
+  console.log(nextid);
   // console.log(colorData1.data[nextid].colorA);
-  if (!colorData1.data[nextid].colorA) {
+  if (colorData1.data[nextid] === undefined) {
+    console.log("finished");
     finished.value = true;
+    finishDialog.value = true;
+  } else {
+    currentNumber.value = currentNumber.value + 1;
   }
 }
 
-// function finish(id)
+function closeStartDialog(id) {
+  storageReset(id);
+  starDialog.value = false;
+  dataSave(id);
+}
+
+function storageReset(id) {
+  localStorage.setItem(id, "");
+}
 
 function dataSave(id) {
   // ローカルストレージからデータを取得
@@ -53,7 +106,7 @@ function dataSave(id) {
   localStorage.setItem(useRoute().params.slug, afterData);
 }
 
-dataSave(useRoute().params.slug);
+// dataSave(useRoute().params.slug);
 
 const buttonDatas = [
   { id: 1, displayText: "◎" },
@@ -61,4 +114,27 @@ const buttonDatas = [
   { id: 3, displayText: "△" },
   { id: 4, displayText: "×" },
 ];
+
+async function submit() {
+  const { data } = await useFetch(
+    "https://script.google.com/macros/s/AKfycbx9lzXy1tQOkLLTAqsD1grwQ6aVbKsNsSYfLbVe2feq5OG7tG-EVivusMCNxegSbeCh/exec",
+    {
+      method: "POST",
+      body: localStorage.getItem(useRoute().params.slug),
+    }
+  );
+  console.log(data);
+  localStorage.setItem(useRoute().params.slug + "_is_finished", true);
+  navigateTo("/");
+}
+
+definePageMeta({
+  middleware: [
+    function (to, from) {
+      if (!useCookie("visited").value) {
+        return navigateTo("/about");
+      }
+    },
+  ],
+});
 </script>
