@@ -32,12 +32,16 @@ import colorData1 from "@/assets/json/1.json";
 
 const dialog = ref(true);
 const currentNumber = ref(0);
+const finished = ref(false);
 
 function next(id) {
   dataSave(id);
   currentNumber.value = currentNumber.value + 1;
   const nextid = id + 1;
-  console.log(colorData1.data[id.nextid].colorA);
+  // console.log(colorData1.data[nextid].colorA);
+  if (!colorData1.data[nextid].colorA) {
+    finished.value = true;
+  }
 }
 
 // function finish(id)

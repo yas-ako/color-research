@@ -23,7 +23,7 @@ const researchList = [
     link: "/research/2",
     is_finished: "2_is_finished",
     title: "調査②",
-    id: 2,
+    id: "2",
     text: "色の心地よさ",
   },
 ];

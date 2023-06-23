@@ -8,10 +8,11 @@
       v-if="$route.path.match(/1/)"
       class="w-100 colorB h-half pa-auto"
     ></div>
-    <div
-      v-else-if="$route.path.match(/2/)"
-      class="w-100 colorB h-all pa-auto"
-    ></div>
+    <template v-else-if="$route.path.match(/2/)">
+      <div class="w-100 colorA h-all pa-auto text-center">
+        <div class="text-h4 my-auto">あいうえお憂鬱</div>
+      </div>
+    </template>
     <div v-else>
       不正なURLです。
       <NuxtLink to="/">
@@ -24,6 +25,7 @@
 <style scoped>
 .colorA {
   background-color: v-bind(colorA);
+  color: v-bind(colorB);
 }
 .colorB {
   background-color: v-bind(colorB);
@@ -33,6 +35,8 @@
 }
 .h-all {
   height: 60dvh;
+  display: grid;
+  place-items: center;
 }
 </style>
 
