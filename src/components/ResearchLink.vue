@@ -5,8 +5,8 @@
     :text="text"
     :to="link"
     class="bg-secondary my-7"
-    @click="storageReset(id)"
   />
+  <!-- @click="storageReset(id)" -->
   <v-card
     v-else
     :title="title"
