@@ -28,13 +28,19 @@
 </template>
 
 <script setup>
+import colorData1 from "@/assets/json/1.json";
+
 const dialog = ref(true);
 const currentNumber = ref(0);
 
 function next(id) {
-  currentNumber.value = currentNumber.value + 1;
   dataSave(id);
+  currentNumber.value = currentNumber.value + 1;
+  const nextid = id + 1;
+  console.log(colorData1.data[id.nextid].colorA);
 }
+
+// function finish(id)
 
 function dataSave(id) {
   // ローカルストレージからデータを取得
@@ -42,6 +48,8 @@ function dataSave(id) {
   const afterData = curData ? curData + "," + id : id;
   localStorage.setItem(useRoute().params.slug, afterData);
 }
+
+dataSave(useRoute().params.slug);
 
 const buttonDatas = [
   { id: 1, displayText: "◎" },
