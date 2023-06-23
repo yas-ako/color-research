@@ -3,7 +3,7 @@
     <v-app-bar>
       <v-app-bar-title>
         <NuxtLink to="/"
-          ><h1 class="text-h5">色の組み合わせに関する調査</h1></NuxtLink
+          ><h1 class="text-h6">色の組み合わせに関する調査</h1></NuxtLink
         >
       </v-app-bar-title>
       <v-app-bar-nav-icon
