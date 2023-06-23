@@ -2,15 +2,15 @@
   <div>
     <div
       v-if="$route.path.match(/1/)"
-      class="w-100 color1 pa-auto h-half"
+      class="w-100 colorA pa-auto h-half"
     ></div>
     <div
       v-if="$route.path.match(/1/)"
-      class="w-100 color2 h-half pa-auto"
+      class="w-100 colorB h-half pa-auto"
     ></div>
     <div
       v-else-if="$route.path.match(/2/)"
-      class="w-100 color2 h-all pa-auto"
+      class="w-100 colorB h-all pa-auto"
     ></div>
     <div v-else>
       不正なURLです。
@@ -22,11 +22,11 @@
 </template>
 
 <style scoped>
-.color1 {
-  background-color: v-bind(color1);
+.colorA {
+  background-color: v-bind(colorA);
 }
-.color2 {
-  background-color: v-bind(color2);
+.colorB {
+  background-color: v-bind(colorB);
 }
 .h-half {
   height: 30dvh;
@@ -45,24 +45,21 @@ interface Props {
 interface colorDatas {
   type: number;
   data: {
-    color1: string;
-    color2: string;
+    colorA: string;
+    colorB: string;
   };
 }
 
 import colorData1 from "@/assets/json/1.json";
 
 const id = withDefaults(defineProps<Props>(), {
-  id: 1,
+  id: 0,
 });
 
-const color1 = ref("#222222");
-
-watch(id, (next, prev) => {
-  color1.value = colorData1.data[id.id].color1;
+const colorA = computed(() => {
+  return colorData1.data[id.id].colorA;
 });
-
-const color2 = computed(() => {
-  return colorData1.data[id.id].color2;
+const colorB = computed(() => {
+  return colorData1.data[id.id].colorB;
 });
 </script>
