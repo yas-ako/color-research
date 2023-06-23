@@ -10,7 +10,7 @@
     ></div>
     <template v-else-if="$route.path.match(/1/)">
       <div class="w-100 colorA h-all pa-auto text-center">
-        <div class="text-h4 my-auto">あいうえお憂鬱</div>
+        <div class="text-h4 my-auto">あいうえお</div>
       </div>
     </template>
     <div v-else>
