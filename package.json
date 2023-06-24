@@ -6,7 +6,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "dev-local": "nuxt dev --dotenv .env.local"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
