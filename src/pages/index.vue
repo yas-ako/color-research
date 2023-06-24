@@ -11,6 +11,8 @@
 </template>
 
 <script setup>
+// const runtimeConfig = useRuntimeConfig();
+// console.log(runtimeConfig.GAS_URL);
 const researchList = [
   {
     link: "/research/1",
