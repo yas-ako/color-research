@@ -34,7 +34,14 @@
           アンケートへのご協力ありがとうございました。アンケートは二つあります。両方の回答をお願いします。
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" block @click="submit()">回答を送信</v-btn>
+          <v-btn
+            color="primary"
+            block
+            @click="submit()"
+            :disabled="submitButtonDisabled"
+            :loading="submitButtonDisabled"
+            >回答を送信</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -74,6 +81,7 @@ const starDialog = ref(true);
 const finishDialog = ref(false);
 const currentNumber = ref(0);
 const finished = ref(false);
+const submitButtonDisabled = ref(false);
 
 function next(id) {
   dataSave(id);
@@ -116,11 +124,15 @@ const buttonDatas = [
 ];
 
 async function submit() {
+  submitButtonDisabled.value = true;
   const { data } = await useFetch(
     "https://script.google.com/macros/s/AKfycbx9lzXy1tQOkLLTAqsD1grwQ6aVbKsNsSYfLbVe2feq5OG7tG-EVivusMCNxegSbeCh/exec",
     {
       method: "POST",
       body: localStorage.getItem(useRoute().params.slug),
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
     }
   );
   console.log(data);
