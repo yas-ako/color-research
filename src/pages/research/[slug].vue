@@ -82,6 +82,7 @@ const finishDialog = ref(false);
 const currentNumber = ref(0);
 const finished = ref(false);
 const submitButtonDisabled = ref(false);
+const isInProduction = false;
 
 function next(id) {
   dataSave(id);
@@ -125,18 +126,20 @@ const buttonDatas = [
 
 async function submit() {
   submitButtonDisabled.value = true;
-  const { data } = await useFetch(
-    "https://script.google.com/macros/s/AKfycbx9lzXy1tQOkLLTAqsD1grwQ6aVbKsNsSYfLbVe2feq5OG7tG-EVivusMCNxegSbeCh/exec",
-    {
-      method: "POST",
-      body: localStorage.getItem(useRoute().params.slug),
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-    }
-  );
-  console.log(data);
-  localStorage.setItem(useRoute().params.slug + "_is_finished", true);
+  if (isInProduction) {
+    const { data } = await useFetch(
+      "https://script.google.com/macros/s/AKfycbx9lzXy1tQOkLLTAqsD1grwQ6aVbKsNsSYfLbVe2feq5OG7tG-EVivusMCNxegSbeCh/exec",
+      {
+        method: "POST",
+        body: localStorage.getItem(useRoute().params.slug),
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+      }
+    );
+    console.log(data);
+    localStorage.setItem(useRoute().params.slug + "_is_finished", true);
+  }
   navigateTo("/");
 }
 
