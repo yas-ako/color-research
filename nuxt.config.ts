@@ -11,6 +11,11 @@ export default defineNuxtConfig({
     "mdi/css/materialdesignicons.min.css",
     "~/assets/css/style.css",
   ],
+  nitro: {
+    routeRules: {
+      "/api/**": { ssr: true },
+    },
+  },
   app: {
     head: {
       link: [
