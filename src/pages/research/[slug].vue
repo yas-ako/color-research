@@ -31,7 +31,7 @@
       <v-card>
         <v-card-text>
           <p class="text-h4">aa</p>
-          アンケートへのご協力ありがとうございました。アンケートは二つあります。両方の回答をお願いします。
+          {{ finishMessage }}
         </v-card-text>
         <v-card-actions>
           <v-btn
@@ -83,6 +83,9 @@ const currentNumber = ref(0);
 const finished = ref(false);
 const submitButtonDisabled = ref(false);
 const isInProduction = false;
+const finishMessage = ref(
+  "アンケートへのご協力ありがとうございました。アンケートは二つあります。両方の回答をお願いします。"
+);
 
 function next(id) {
   dataSave(id);
@@ -126,20 +129,17 @@ const buttonDatas = [
 
 async function submit() {
   submitButtonDisabled.value = true;
-  if (isInProduction) {
-    const { data } = await useFetch(
-      "https://script.google.com/macros/s/AKfycbx9lzXy1tQOkLLTAqsD1grwQ6aVbKsNsSYfLbVe2feq5OG7tG-EVivusMCNxegSbeCh/exec",
-      {
-        method: "POST",
-        body: localStorage.getItem(useRoute().params.slug),
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-      }
-    );
-    console.log(data);
-    localStorage.setItem(useRoute().params.slug + "_is_finished", true);
-  }
+  const { data } = useFetch("/api/postData", {
+    method: "POST",
+    body: localStorage.getItem(useRoute().params.slug),
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8",
+    },
+  });
+  console.log(data);
+  localStorage.setItem(useRoute().params.slug + "_is_finished", true);
+  finishMessage.value = "送信が完了しました。";
+
   navigateTo("/");
 }
 

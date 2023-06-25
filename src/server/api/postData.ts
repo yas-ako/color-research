@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   console.log(prompt);
   const response = await fetch(process.env.GAS_URL, {
     method: "POST",
-    body: JSON.stringify(prompt),
+    body: prompt,
     headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },
