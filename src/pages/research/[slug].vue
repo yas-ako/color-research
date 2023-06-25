@@ -30,7 +30,6 @@
     <v-dialog v-model="finishDialog" persistent width="auto">
       <v-card>
         <v-card-text>
-          <p class="text-h4">aa</p>
           {{ finishMessage }}
         </v-card-text>
         <v-card-actions>
@@ -49,7 +48,11 @@
 
   <DisplayColor :id="currentNumber" :type="$route.params.slug" />
 
-  <v-bottom-navigation class="text-h5 p-6" v-if="$route.path.match(/research/)">
+  <v-bottom-navigation
+    grow
+    class="text-h5 p-6"
+    v-if="$route.path.match(/research/)"
+  >
     <template v-for="buttonData of buttonDatas">
       <SurveyButtonIcon
         class="pa-5"
@@ -59,6 +62,9 @@
       />
     </template>
   </v-bottom-navigation>
+  <v-progress-linear
+    :model-value="(currentNumber / colorData1.data.length) * 100"
+  />
 </template>
 
 <script setup>
