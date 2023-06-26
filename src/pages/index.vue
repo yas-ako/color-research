@@ -9,26 +9,27 @@
     />
   </template>
   <v-dialog v-model="error" persistent width="auto">
-      <v-card>
-        <v-card-text>
-            <p class="text-h4">
-              Internet server error!</br> Please try again!
-            </p>
-        </v-card-text>
-        <!-- <v-card-actions> -->
-          <!-- <v-btn -->
-            <!-- color="primary" -->
-            <!-- block -->
-            <!-- @click="closeStartDialog($route.params.slug)" -->
-            <!-- >OK</v-btn -->
-          <!-- > -->
-        <!-- </v-card-actions> -->
-      </v-card>
-    </v-dialog>
+    <v-card>
+      <v-card-text>
+        <p class="text-h4">
+          Internet server error!<br />
+          Please try again!
+        </p>
+      </v-card-text>
+      <!-- <v-card-actions> -->
+      <!-- <v-btn -->
+      <!-- color="primary" -->
+      <!-- block -->
+      <!-- @click="closeStartDialog($route.params.slug)" -->
+      <!-- >OK</v-btn -->
+      <!-- > -->
+      <!-- </v-card-actions> -->
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup>
-const error=ref(true);
+const error = ref(true);
 // const runtimeConfig = useRuntimeConfig();
 // console.log(runtimeConfig.GAS_URL);
 const researchList = [
