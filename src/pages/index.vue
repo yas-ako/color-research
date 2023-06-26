@@ -8,24 +8,6 @@
       :is_finished="list.is_finished"
     />
   </template>
-  <v-dialog v-model="error" persistent width="auto">
-    <v-card>
-      <v-card-text>
-        <p class="text-h4">
-          Internet server error!<br />
-          Please try again!
-        </p>
-      </v-card-text>
-      <!-- <v-card-actions> -->
-      <!-- <v-btn -->
-      <!-- color="primary" -->
-      <!-- block -->
-      <!-- @click="closeStartDialog($route.params.slug)" -->
-      <!-- >OK</v-btn -->
-      <!-- > -->
-      <!-- </v-card-actions> -->
-    </v-card>
-  </v-dialog>
 </template>
 
 <script setup>
