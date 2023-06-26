@@ -24,11 +24,12 @@
 
 <style scoped>
 .colorA {
-  background-color: v-bind(colorA);
-  color: v-bind(colorB);
+  /* background-color: v-bind(colorA); */
+  background-color: lch(v-bind(colorA));
+  color: lch(v-bind(colorB));
 }
 .colorB {
-  background-color: v-bind(colorB);
+  background-color: lch(v-bind(colorB));
 }
 .h-half {
   height: 30dvh;
@@ -44,6 +45,7 @@
 interface Props {
   type: string | string[];
   id: number;
+  group_id: number;
 }
 
 interface colorDatas {
@@ -55,15 +57,26 @@ interface colorDatas {
 }
 
 import colorData1 from "@/assets/json/1.json";
+import colorData2 from "@/assets/json/combination_list.json";
 
-const id = withDefaults(defineProps<Props>(), {
+const Props = withDefaults(defineProps<Props>(), {
   id: 0,
+  group_id: 0,
 });
 
 const colorA = computed(() => {
-  return colorData1.data[id.id].colorA;
+  // return colorData1.data[id.id].colorA;
+  const l = colorData2[Props.group_id][Props.id][0][1];
+  const c = colorData2[Props.group_id][Props.id][0][2];
+  const h = colorData2[Props.group_id][Props.id][0][0];
+  return [l + "% " + (c * 134) / 100 + " " + h];
+  // return [l + "%", (c * 134) / 100, h];
 });
 const colorB = computed(() => {
-  return colorData1.data[id.id].colorB;
+  // return colorData1.data[id.id].colorB;
+  const l = colorData2[Props.group_id][Props.id][1][1];
+  const c = colorData2[Props.group_id][Props.id][1][2];
+  const h = colorData2[Props.group_id][Props.id][1][0];
+  return [l + "% " + (c * 134) / 100 + " " + h];
 });
 </script>

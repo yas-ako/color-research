@@ -30,7 +30,13 @@
     <v-dialog v-model="finishDialog" persistent width="auto">
       <v-card>
         <v-card-text>
-          {{ finishMessage }}
+          <!-- {{ finishMessage }} -->
+          <p class="text-h4">アンケートへのご協力ありがとうございました。</p>
+          <p>
+            アンケートは二つあります。両方の回答をお願いします。<br />どちらの調査も、いくつかあるパターンの中からランダムで選んだ63個です。
+            <br />パターンは20個あるため、最大で20回までなら回答することができます。お時間に余裕のある方は、何度か回答していただけると幸いです。
+            {{ finishMessage }}
+          </p>
         </v-card-text>
         <v-card-actions>
           <v-btn
@@ -46,7 +52,11 @@
     </v-dialog>
   </div>
 
-  <DisplayColor :id="currentNumber" :type="$route.params.slug" />
+  <DisplayColor
+    :id="currentNumber"
+    :type="$route.params.slug"
+    :group_id="group_id"
+  />
 
   <v-bottom-navigation
     grow
@@ -63,18 +73,19 @@
     </template>
   </v-bottom-navigation>
   <v-progress-linear
-    :model-value="(currentNumber / colorData1.data.length) * 100"
+    :model-value="(currentNumber / colorData2[group_id].length) * 100"
   />
 </template>
 
 <script setup>
 import colorData1 from "@/assets/json/1.json";
+import colorData2 from "@/assets/json/combination_list.json";
 
 const surveyInstruction = {
   1: {
     title: "調査1",
     message:
-      "調査1では、色の見分けやすさを判断していただきます。画面に表示された色が見やすいかどうか、4段階で評価してください。見やすく感じるものから、「◎」「〇」「△」「×」の順で評価してください。",
+      "調査1では、色の見分けやすさを判断していただきます。画面に表示された色が見やすいかどうか、4段階で評価してください。見やすく感じるものから、「◎」「〇」「△」「×」の順で評価してください。(背景と文字が全く同じ場合があります。その場合は、「×」を選択してください)",
   },
   2: {
     titlte: "調査2",
@@ -83,23 +94,24 @@ const surveyInstruction = {
   },
 };
 
+const group_id = Math.floor(Math.random() * 20);
+
 const starDialog = ref(true);
 const finishDialog = ref(false);
 const currentNumber = ref(0);
 const finished = ref(false);
 const submitButtonDisabled = ref(false);
 const isInProduction = false;
-const finishMessage = ref(
-  "アンケートへのご協力ありがとうございました。アンケートは二つあります。両方の回答をお願いします。"
-);
+const finishMessage = ref();
 
 function next(id) {
   dataSave(id);
   const nextid = currentNumber.value + 1;
-  console.log(nextid);
+  // console.log(nextid);
   // console.log(colorData1.data[nextid].colorA);
-  if (colorData1.data[nextid] === undefined) {
-    console.log("finished");
+  // if (colorData1.data[nextid] === undefined) { ------------------------------
+  if (colorData2[group_id][nextid] === undefined) {
+    // console.log("finished");
     finished.value = true;
     finishDialog.value = true;
   } else {

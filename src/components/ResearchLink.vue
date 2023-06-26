@@ -4,15 +4,17 @@
     :title="title"
     :text="text"
     :to="link"
-    class="bg-secondary my-7"
+    class="bg-blue-lighten-4 my-7"
   />
   <!-- @click="storageReset(id)" -->
   <v-card
     v-else
     :title="title"
+    :to="link"
     :text="text + ' (回答済み)'"
-    class="bg-gray my-7"
-  />
+    class="bg-grey-darken-1 my-7"
+  >
+  </v-card>
 </template>
 
 <script setup lang="ts">
