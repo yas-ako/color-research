@@ -8,7 +8,7 @@
       :is_finished="list.is_finished"
     />
   </template>
-  <v-dialog v-model="starDialog" persistent width="auto">
+  <v-dialog v-model="error" persistent width="auto">
       <v-card>
         <v-card-text>
             <p class="text-h4">
@@ -28,6 +28,7 @@
 </template>
 
 <script setup>
+const error=ref(true);
 // const runtimeConfig = useRuntimeConfig();
 // console.log(runtimeConfig.GAS_URL);
 const researchList = [
