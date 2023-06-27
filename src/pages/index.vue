@@ -1,4 +1,9 @@
 <template>
+  <v-alert
+    closable
+    text="6/27日 15:30ごろまで、アンケート調査に回答できいない状態となっていました。現在は修正されております。"
+    type="info"
+  ></v-alert>
   <template v-for="list in researchList">
     <ResearchLink
       :link="list.link"

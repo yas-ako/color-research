@@ -20,7 +20,7 @@
           <v-btn
             color="primary"
             block
-            @click="closeStartDialog($route.params.slug)"
+            @click="closeStartDialog($route.params.slug + '-' + group_id)"
             >OK</v-btn
           >
         </v-card-actions>
@@ -33,8 +33,13 @@
           <!-- {{ finishMessage }} -->
           <p class="text-h4">アンケートへのご協力ありがとうございました。</p>
           <p>
-            アンケートは二つあります。両方の回答をお願いします。<br />どちらの調査も、いくつかあるパターンの中からランダムで選んだ63個です。
-            <br />パターンは20個あるため、最大で20回までなら回答することができます。お時間に余裕のある方は、何度か回答していただけると幸いです。
+            <span>
+              アンケートは二つあります。両方の回答をお願いします。<br />どちらの調査も、いくつかあるパターンの中からランダムで選んだ63個です。
+            </span>
+            <br />
+            <span>
+              お時間に余裕のある方は、何度か回答していただけると幸いです。
+            </span>
             {{ finishMessage }}
           </p>
         </v-card-text>
@@ -85,7 +90,7 @@ const surveyInstruction = {
   1: {
     title: "調査1",
     message:
-      "調査1では、色の見分けやすさを判断していただきます。画面に表示された色が見やすいかどうか、4段階で評価してください。見やすく感じるものから、「◎」「〇」「△」「×」の順で評価してください。(背景と文字が全く同じ場合があります。その場合は、「×」を選択してください)",
+      "調査1では、色の見分けやすさを判断していただきます。画面に表示された色が見やすいかどうか、4段階で評価してください。見やすく感じるものから、「◎」「〇」「△」「×」の順で評価してください。",
   },
   2: {
     titlte: "調査2",
@@ -95,6 +100,7 @@ const surveyInstruction = {
 };
 
 const group_id = Math.floor(Math.random() * 20);
+console.log(group_id);
 
 const starDialog = ref(true);
 const finishDialog = ref(false);
@@ -131,9 +137,12 @@ function storageReset(id) {
 
 function dataSave(id) {
   // ローカルストレージからデータを取得
-  const curData = localStorage.getItem(useRoute().params.slug);
-  const afterData = curData ? curData + "," + id : id;
-  localStorage.setItem(useRoute().params.slug, afterData);
+  const curData = localStorage.getItem(useRoute().params.slug + "-" + group_id);
+  const afterData = curData
+    ? curData + "," + id
+    : id + "," + useCookie("user").value + "," + new Date().toISOString();
+
+  localStorage.setItem(useRoute().params.slug + "-" + group_id, afterData);
 }
 
 // dataSave(useRoute().params.slug);
@@ -149,7 +158,7 @@ async function submit() {
   submitButtonDisabled.value = true;
   const { data } = useFetch("/api/postData", {
     method: "POST",
-    body: localStorage.getItem(useRoute().params.slug),
+    body: localStorage.getItem(useRoute().params.slug + "-" + group_id),
     headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },
