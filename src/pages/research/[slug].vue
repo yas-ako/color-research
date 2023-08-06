@@ -148,7 +148,15 @@ function dataSave(id) {
   );
   const afterData = curData
     ? curData + "," + id
-    : id + "," + useCookie("user").value + "," + new Date().toISOString();
+    : id +
+      "," +
+      useRoute().params.slug +
+      "," +
+      group_id_string +
+      "," +
+      useCookie("user").value +
+      "," +
+      new Date().toISOString();
 
   localStorage.setItem(
     useRoute().params.slug + "-" + group_id_string,
