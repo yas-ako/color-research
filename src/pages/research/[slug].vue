@@ -104,7 +104,7 @@ const surveyInstruction = {
 const group_id = Math.floor(Math.random() * 20);
 
 // 二けたにする
-const group_id_string = String(Math.floor(Math.random() * 20)).padStart(2, "0");
+const group_id_string = String(group_id).padStart(2, "0");
 
 console.log(group_id);
 
