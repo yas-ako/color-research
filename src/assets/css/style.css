@@ -13,3 +13,12 @@ html {
 p {
   margin-top: 5px;
 }
+
+@font-face {
+  font-family: "Noto Sans JP";
+  /* font-style: normal; */
+  /* font-weight: 300; */
+  font-display: swap;
+  /* src: url('./fonts/Roboto-Light.ttf') format('truetype'); */
+  src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+}
