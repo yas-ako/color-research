@@ -21,14 +21,16 @@ const error = ref(true);
 // console.log(runtimeConfig.GAS_URL);
 const researchList = [
   {
-    link: "/research/1",
+    // link: "/research/1",
+    link: "/research/01",
     is_finished: "1_is_finished",
     title: "調査①",
     id: "1",
     text: "色の見分け安さ",
   },
   {
-    link: "/research/2",
+    // link: "/research/2",
+    link: "/research/02",
     is_finished: "2_is_finished",
     title: "調査②",
     id: "2",

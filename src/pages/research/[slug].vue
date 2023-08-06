@@ -3,13 +3,15 @@
     <v-dialog v-model="starDialog" persistent width="auto">
       <v-card>
         <v-card-text>
-          <template v-if="$route.params.slug == '1'">
+          <!-- <template v-if="$route.params.slug == '1'"> -->
+          <template v-if="$route.params.slug == '01'">
             <p class="text-h4">
               {{ surveyInstruction[1].title }}
             </p>
             {{ surveyInstruction[1].message }}
           </template>
-          <template v-if="$route.params.slug == '2'">
+          <!-- <template v-if="$route.params.slug == '2'"> -->
+          <template v-if="$route.params.slug == '02'">
             <p class="text-h4">
               {{ surveyInstruction[2].title }}
             </p>
@@ -100,6 +102,10 @@ const surveyInstruction = {
 };
 
 const group_id = Math.floor(Math.random() * 20);
+
+// 二けたにする
+const group_id_string = String(Math.floor(Math.random() * 20)).padStart(2, "0");
+
 console.log(group_id);
 
 const starDialog = ref(true);
@@ -137,12 +143,17 @@ function storageReset(id) {
 
 function dataSave(id) {
   // ローカルストレージからデータを取得
-  const curData = localStorage.getItem(useRoute().params.slug + "-" + group_id);
+  const curData = localStorage.getItem(
+    useRoute().params.slug + "-" + group_id_string
+  );
   const afterData = curData
     ? curData + "," + id
     : id + "," + useCookie("user").value + "," + new Date().toISOString();
 
-  localStorage.setItem(useRoute().params.slug + "-" + group_id, afterData);
+  localStorage.setItem(
+    useRoute().params.slug + "-" + group_id_string,
+    afterData
+  );
 }
 
 // dataSave(useRoute().params.slug);
@@ -158,7 +169,7 @@ async function submit() {
   submitButtonDisabled.value = true;
   const { data } = useFetch("/api/postData", {
     method: "POST",
-    body: localStorage.getItem(useRoute().params.slug + "-" + group_id),
+    body: localStorage.getItem(useRoute().params.slug + "-" + group_id_string),
     headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },
