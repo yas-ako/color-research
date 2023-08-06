@@ -57,7 +57,8 @@ interface colorDatas {
 }
 
 import colorData1 from "@/assets/json/1.json";
-import colorData2 from "@/assets/json/combination_list.json";
+// import colorData2 from "@/assets/json/combination_list.json";
+import colorData2 from "@/assets/json/combination_list2.json";
 
 const Props = withDefaults(defineProps<Props>(), {
   id: 0,
