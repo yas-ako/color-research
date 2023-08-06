@@ -1,7 +1,12 @@
 <template>
-  <v-alert
+  <!-- <v-alert
     closable
     text="6/27日 15:30ごろまで、アンケート調査に回答できいない状態となっていました。現在は修正されております。"
+    type="info"
+  ></v-alert> -->
+  <v-alert
+    closable
+    text="アンケートフォームに不具合があり，一部の色に関する質問しかできていない状態でした。申し訳ありませんが、すでに回答いただいた方も，もう一度ご協力をお願いいたします。"
     type="info"
   ></v-alert>
   <template v-for="list in researchList">
