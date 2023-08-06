@@ -192,7 +192,9 @@ async function submit() {
 definePageMeta({
   middleware: [
     function (to, from) {
-      if (!useCookie("visited").value) {
+      if (!useCookie("confirmed").value) {
+        return navigateTo("/about");
+      } else if (!useCookie("user").value) {
         return navigateTo("/about");
       }
     },
