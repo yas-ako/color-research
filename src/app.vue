@@ -18,6 +18,22 @@
         </v-btn>
       </v-container>
     </v-navigation-drawer>
+
+    <!-- アンケート調査の終了のお知らせ -->
+    <v-dialog v-model="endOfInvestigation" persistent width="auto">
+      <v-card>
+        <v-card-text class="pb-4">
+          アンケート調査は終了いたしました。ご協力いただいた皆様，ありがとうございました。
+        </v-card-text>
+        <!-- <v-card-actions> -->
+        <!-- <v-btn color="primary" block @click="dialog = false" -->
+        <!-- >Close Dialog</v-btn -->
+        <!-- > -->
+        <!-- </v-card-actions> -->
+      </v-card>
+    </v-dialog>
+    <!-- アンケート調査の終了のお知らせ -->
+
     <v-main>
       <v-container>
         <NuxtPage />
@@ -28,4 +44,5 @@
 
 <script setup>
 const isMenuOpen = ref(false);
+const endOfInvestigation = ref(true);
 </script>
